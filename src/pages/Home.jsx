@@ -37,9 +37,7 @@ const Home = () => {
                 Sensores de Temperatura
             </Typography>
             {loading && <CircularProgress />}{' '}
-            {/* Mostramos carga mientras esperamos datos */}
             {error && <Alert severity="error">{error}</Alert>}{' '}
-            {/* Mostramos error si falla la API */}
             {!loading && !error && (
                 <Grid container spacing={2}>
                     {sensors.length > 0 ? (

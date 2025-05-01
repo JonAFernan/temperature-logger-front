@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Typography } from '@mui/material';
+import { Container, CircularProgress } from '@mui/material';
 import SensorCardDetailed from '../components/SensorCardDetailed';
-import { Link } from 'react-router-dom';
+
 import { useNavigate } from 'react-router-dom';
+import { HomeButton } from '../components/HomeButton';
 
 const SensorDetail = () => {
     const { id } = useParams();
@@ -14,7 +15,7 @@ const SensorDetail = () => {
         fetch(`http://localhost:3000/sensors/${id}`)
             .then((response) => {
                 if (response.status === 500) {
-                    navigate('/404'); // 🔹 Redirige a la página 404 si el backend falla
+                    navigate('/500');
                     return;
                 }
                 return response.json();
@@ -23,13 +24,18 @@ const SensorDetail = () => {
             .catch((error) => {
                 console.error('Error fetching sensor:', error);
             });
-    }, [id]);
+    }, [id, navigate]);
 
-    if (!sensor) return <Typography>Cargando...</Typography>;
+    if (!sensor)
+        return (
+            <Container>
+                <CircularProgress />
+            </Container>
+        );
 
     return (
         <>
-            <Link to={`/`}>HOME</Link>
+            <HomeButton></HomeButton>
             <Container>
                 <SensorCardDetailed sensor={sensor} />
             </Container>
