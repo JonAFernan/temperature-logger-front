@@ -61,8 +61,6 @@ const Charts = ({ sensor_id }) => {
         temperature: record.temperature,
     }));
 
-    console.log('aAA', formattedData.length);
-
     return (
         <Box
             sx={{
