@@ -8,6 +8,7 @@ export const API_URLS = {
     UPDATE_SENSOR: `${API_BASE_URL}/sensors/`,
     DELETE_SENSOR: `${API_BASE_URL}/sensors/`,
     ADD_RECORDS: `${API_BASE_URL}/records/add`,
+    GET_RECORDS: `${API_BASE_URL}/records/find`,
 };
 
 export default API_URLS;

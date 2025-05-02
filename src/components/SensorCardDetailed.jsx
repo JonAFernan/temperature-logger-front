@@ -55,7 +55,7 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                     </Box>
                 </CardContent>
             </Card>
-            <Charts />
+            <Charts sensor_id={sensor.sensor_id} />
             <DeleteSensor
                 open={isDeleting}
                 sensor={sensor}

@@ -28,7 +28,7 @@ const SensorDetail = () => {
                 });
         }
         setUpdate(false);
-    }, [id, navigate, isUpdate, sensor]);
+    }, [isUpdate]);
 
     if (!sensor)
         return (
