@@ -42,7 +42,7 @@ const Home = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setUpdate(true);
-        }, 60000);
+        }, 300000);
 
         return () => clearInterval(interval);
     }, []);

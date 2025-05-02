@@ -56,5 +56,5 @@ export const startSimulator = async () => {
         const sensors = await fetchSensors();
         const newData = generateSensorData(sensors);
         sendDataToBackend(newData);
-    }, 60000);
+    }, 300000);
 };
