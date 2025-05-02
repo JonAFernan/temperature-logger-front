@@ -6,6 +6,7 @@ import { color } from '../lib/aux-functions.js';
 import { useState } from 'react';
 import UpdateSensor from './UpdateSensor.jsx';
 import DeleteSensor from './DeleteSensor.jsx';
+import Charts from './Charts.jsx';
 
 const SensorCardDetailed = ({ sensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
@@ -54,6 +55,7 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                     </Box>
                 </CardContent>
             </Card>
+            <Charts />
             <DeleteSensor
                 open={isDeleting}
                 sensor={sensor}
