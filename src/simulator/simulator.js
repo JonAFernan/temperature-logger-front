@@ -1,3 +1,4 @@
+import API_URLS from '../lib/apiUrls.js';
 //Formato compatible con la base de datos
 const formatDate = (date) => {
     return date.split('.')[0] + '+00:00';
@@ -15,7 +16,7 @@ function getRandomTemperature(max, temperature) {
 //Función para obtener sensores desde el backend
 const fetchSensors = async () => {
     try {
-        const response = await fetch('http://localhost:3000/sensors/all');
+        const response = await fetch(API_URLS.GET_ALL_SENSORS);
         if (!response.ok) throw new Error('Error obteniendo sensores');
         const sensors = await response.json();
         return sensors;
@@ -37,7 +38,7 @@ const generateSensorData = (sensors) => {
 // Función para enviar datos al backend
 const sendDataToBackend = async (data) => {
     try {
-        const response = await fetch('http://localhost:3000/records/add', {
+        const response = await fetch(API_URLS.ADD_RECORDS, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -51,7 +52,6 @@ const sendDataToBackend = async (data) => {
 };
 
 export const startSimulator = async () => {
-    console.log('simulator running');
     const sensors = await fetchSensors();
 
     setInterval(() => {

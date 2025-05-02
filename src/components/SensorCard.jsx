@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { color } from '../controllers/aux-functions.js';
+import { color } from '../lib/aux-functions.js';
 
 const SensorCard = ({ sensor }) => {
     return (

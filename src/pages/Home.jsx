@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SensorCard from '../components/SensorCard';
+import AddSensorButton from '../components/AddSensorButton';
+import API_URLS from '../lib/apiUrls.js';
 import {
     Container,
     Grid,
@@ -14,7 +16,7 @@ const Home = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/sensors/all')
+        fetch(API_URLS.GET_ALL_SENSORS)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Error al conectar con el servidor');
@@ -32,34 +34,37 @@ const Home = () => {
     }, []);
 
     return (
-        <Container>
-            <Typography variant="h4" gutterBottom>
-                Sensores de Temperatura
-            </Typography>
-            {loading && <CircularProgress />}{' '}
-            {error && <Alert severity="error">{error}</Alert>}{' '}
-            {!loading && !error && (
-                <Grid container spacing={2}>
-                    {sensors.length > 0 ? (
-                        sensors.map((sensor) => (
-                            <Grid
-                                item
-                                key={sensor.sensor_id}
-                                xs={12}
-                                sm={6}
-                                md={4}
-                            >
-                                <SensorCard sensor={sensor} />
-                            </Grid>
-                        ))
-                    ) : (
-                        <Typography variant="body1">
-                            No hay sensores disponibles.
-                        </Typography>
-                    )}
-                </Grid>
-            )}
-        </Container>
+        <>
+            <Container>
+                <Typography variant="h4" gutterBottom>
+                    Sensores de Temperatura
+                </Typography>
+                {loading && <CircularProgress />}{' '}
+                {error && <Alert severity="error">{error}</Alert>}{' '}
+                {!loading && !error && (
+                    <Grid container spacing={2}>
+                        {sensors.length > 0 ? (
+                            sensors.map((sensor) => (
+                                <Grid
+                                    item
+                                    key={sensor.sensor_id}
+                                    xs={12}
+                                    sm={6}
+                                    md={4}
+                                >
+                                    <SensorCard sensor={sensor} />
+                                </Grid>
+                            ))
+                        ) : (
+                            <Typography variant="body1">
+                                No hay sensores disponibles.
+                            </Typography>
+                        )}
+                    </Grid>
+                )}
+            </Container>
+            <AddSensorButton></AddSensorButton>
+        </>
     );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, IconButton, Box } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { color } from '../controllers/aux-functions.js';
+import { color } from '../lib/aux-functions.js';
 
 const SensorCardDetailed = ({ sensor, onUpdateSensor, onDeleteSensor }) => {
     return (
