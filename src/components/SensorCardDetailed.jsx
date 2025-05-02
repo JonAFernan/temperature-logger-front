@@ -5,9 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { color } from '../lib/aux-functions.js';
 import { useState } from 'react';
 import UpdateSensor from './UpdateSensor.jsx';
+import DeleteSensor from './DeleteSensor.jsx';
 
-const SensorCardDetailed = ({ sensor, onDeleteSensor, setUpdate }) => {
+const SensorCardDetailed = ({ sensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     return (
         <>
             <Card
@@ -43,12 +45,20 @@ const SensorCardDetailed = ({ sensor, onDeleteSensor, setUpdate }) => {
                             <EditIcon />
                         </IconButton>
 
-                        <IconButton color="error" onClick={onDeleteSensor}>
+                        <IconButton
+                            color="error"
+                            onClick={() => setIsDeleting(true)}
+                        >
                             <DeleteIcon />
                         </IconButton>
                     </Box>
                 </CardContent>
             </Card>
+            <DeleteSensor
+                open={isDeleting}
+                sensor={sensor}
+                onClose={() => setIsDeleting(false)}
+            />
             <UpdateSensor
                 setUpdate={setUpdate}
                 open={isUpdating}
