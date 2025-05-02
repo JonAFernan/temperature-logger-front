@@ -5,8 +5,8 @@ export const API_URLS = {
     GET_ALL_SENSORS: `${API_BASE_URL}/sensors/all`,
     GET_SENSOR: `${API_BASE_URL}/sensors/`,
     ADD_SENSOR: `${API_BASE_URL}/sensors/add`,
-    UPDATE_SENSOR: `${API_BASE_URL}/sensors/update`,
-    DELETE_SENSOR: `${API_BASE_URL}/sensors/delete`,
+    UPDATE_SENSOR: `${API_BASE_URL}/sensors/`,
+    DELETE_SENSOR: `${API_BASE_URL}/sensors/`,
     ADD_RECORDS: `${API_BASE_URL}/records/add`,
 };
 
