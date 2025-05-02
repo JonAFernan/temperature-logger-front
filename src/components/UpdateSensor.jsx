@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import API_URLS from '../lib/apiUrls.js';
 
-const UpdateSensor = ({ open, sensor, onClose }) => {
+const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
     const [formData, setFormData] = useState({
         id: '',
         address: '',
@@ -24,13 +24,11 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
 
     // Cargar datos iniciales al abrir el modal
     useEffect(() => {
-        if (sensor) {
-            console.log('Datos del sensor al cargar:', sensor);
-            setFormData(sensor);
-        }
+        setFormData(sensor);
     }, [sensor]);
 
-    const handleChange = (event) => {
+    // almacenamos los valores del formulario y converntimos a Number los valores numéricos.
+    const captureForms = (event) => {
         const { name, value } = event.target;
         const numericFields = [
             'alarm_range_min',
@@ -57,6 +55,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     setBackendErrors(data.errors);
                 } else {
                     console.log('Sensor actualizado:', data);
+                    setUpdate(true);
                     onClose();
                 }
             })
@@ -82,7 +81,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     name="address"
                     fullWidth
                     margin="dense"
-                    onChange={handleChange}
+                    onChange={captureForms}
                     value={formData.address}
                 />
                 <TextField
@@ -90,7 +89,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     name="name"
                     fullWidth
                     margin="dense"
-                    onChange={handleChange}
+                    onChange={captureForms}
                     value={formData.name}
                 />
                 <TextField
@@ -99,7 +98,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     type="number"
                     fullWidth
                     margin="dense"
-                    onChange={handleChange}
+                    onChange={captureForms}
                     value={formData.alarm_range_min}
                 />
                 <TextField
@@ -108,7 +107,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     type="number"
                     fullWidth
                     margin="dense"
-                    onChange={handleChange}
+                    onChange={captureForms}
                     value={formData.alarm_range_max}
                 />
                 <TextField
@@ -117,7 +116,7 @@ const UpdateSensor = ({ open, sensor, onClose }) => {
                     type="number"
                     fullWidth
                     margin="dense"
-                    onChange={handleChange}
+                    onChange={captureForms}
                     value={formData.setpoint}
                 />
             </DialogContent>

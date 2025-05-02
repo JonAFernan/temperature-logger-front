@@ -6,7 +6,7 @@ import { color } from '../lib/aux-functions.js';
 import { useState } from 'react';
 import UpdateSensor from './UpdateSensor.jsx';
 
-const SensorCardDetailed = ({ sensor, onDeleteSensor }) => {
+const SensorCardDetailed = ({ sensor, onDeleteSensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
     return (
         <>
@@ -50,6 +50,7 @@ const SensorCardDetailed = ({ sensor, onDeleteSensor }) => {
                 </CardContent>
             </Card>
             <UpdateSensor
+                setUpdate={setUpdate}
                 open={isUpdating}
                 sensor={sensor}
                 onClose={() => setIsUpdating(false)}

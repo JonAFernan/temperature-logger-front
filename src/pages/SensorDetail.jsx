@@ -9,22 +9,26 @@ import { HomeButton } from '../components/HomeButton';
 const SensorDetail = () => {
     const { id } = useParams();
     const [sensor, setSensor] = useState(null);
+    const [isUpdate, setUpdate] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${API_URLS.GET_SENSOR}${id}`)
-            .then((response) => {
-                if (response.status === 500) {
-                    navigate('/500');
-                    return;
-                }
-                return response.json();
-            })
-            .then((data) => setSensor(data))
-            .catch((error) => {
-                console.error('Error fetching sensor:', error);
-            });
-    }, [id, navigate]);
+        if (isUpdate) {
+            fetch(`${API_URLS.GET_SENSOR}${id}`)
+                .then((response) => {
+                    if (response.status === 500) {
+                        navigate('/500');
+                        return;
+                    }
+                    return response.json();
+                })
+                .then((data) => setSensor(data))
+                .catch((error) => {
+                    console.error('Error fetching sensor:', error);
+                });
+        }
+        setUpdate(false);
+    }, [id, navigate, isUpdate, sensor]);
 
     if (!sensor)
         return (
@@ -37,7 +41,7 @@ const SensorDetail = () => {
         <>
             <HomeButton></HomeButton>
             <Container>
-                <SensorCardDetailed sensor={sensor} />
+                <SensorCardDetailed sensor={sensor} setUpdate={setUpdate} />
             </Container>
         </>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SensorCard from '../components/SensorCard';
-import AddSensorButton from '../components/AddSensorButton';
+import AddSensor from '../components/AddSensor';
 import API_URLS from '../lib/apiUrls.js';
 import {
     Container,
@@ -14,33 +14,37 @@ const Home = () => {
     const [sensors, setSensors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    //Este estado hace que se actualice la lista de sensores cuando añadimos uno
+    const [isUpdate, setUpdate] = useState(true);
     useEffect(() => {
-        fetch(API_URLS.GET_ALL_SENSORS)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Error al conectar con el servidor');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setSensors(data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
+        if (isUpdate) {
+            fetch(API_URLS.GET_ALL_SENSORS)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Error al conectar con el servidor');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    setSensors(data);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    setError(err.message);
+                    setLoading(false);
+                });
+        }
+        setUpdate(false);
+    }, [isUpdate]);
 
     return (
         <>
             <Container>
-                <Typography variant="h4" gutterBottom>
+                <Typography variant="h1" gutterBottom>
                     Sensores de Temperatura
                 </Typography>
-                {loading && <CircularProgress />}{' '}
-                {error && <Alert severity="error">{error}</Alert>}{' '}
+                {loading && <CircularProgress />}
+                {error && <Alert severity="error">{error}</Alert>}
                 {!loading && !error && (
                     <Grid container spacing={2}>
                         {sensors.length > 0 ? (
@@ -63,7 +67,7 @@ const Home = () => {
                     </Grid>
                 )}
             </Container>
-            <AddSensorButton></AddSensorButton>
+            <AddSensor setUpdate={setUpdate} />
         </>
     );
 };

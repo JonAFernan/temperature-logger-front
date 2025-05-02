@@ -10,7 +10,7 @@ import {
     Alert,
 } from '@mui/material';
 
-const AddSensorButton = () => {
+const AddSensor = ({ setUpdate }) => {
     const [open, setOpen] = useState(false);
     const [sensorData, setSensorData] = useState({
         address: '',
@@ -29,12 +29,12 @@ const AddSensorButton = () => {
             alarm_range_min: '',
             alarm_range_max: '',
             setpoint: '',
-        });
+        }); //limpiar valores al vaciar el modal
         setErrors([]); // Limpiar errores al cerrar el modal
         setOpen(false);
     };
 
-    const handleChange = (event) => {
+    const captureForms = (event) => {
         const { name, value } = event.target;
 
         // Si el campo es numérico, convertimos a Number
@@ -60,7 +60,7 @@ const AddSensorButton = () => {
                 if (data.errors) {
                     setErrors(data.errors); // Guardamos los errores enviados por el backend
                 } else {
-                    console.log('Sensor creado:', data);
+                    setUpdate(true);
                     closeModal();
                 }
             })
@@ -91,14 +91,14 @@ const AddSensorButton = () => {
                         name="address"
                         fullWidth
                         margin="dense"
-                        onChange={handleChange}
+                        onChange={captureForms}
                     />
                     <TextField
                         label="Nombre"
                         name="name"
                         fullWidth
                         margin="dense"
-                        onChange={handleChange}
+                        onChange={captureForms}
                     />
                     <TextField
                         label="Rango mínimo de alarma (°C)"
@@ -106,7 +106,7 @@ const AddSensorButton = () => {
                         type="number"
                         fullWidth
                         margin="dense"
-                        onChange={handleChange}
+                        onChange={captureForms}
                     />
                     <TextField
                         label="Rango máximo de alarma (°C)"
@@ -114,7 +114,7 @@ const AddSensorButton = () => {
                         type="number"
                         fullWidth
                         margin="dense"
-                        onChange={handleChange}
+                        onChange={captureForms}
                     />
                     <TextField
                         label="Setpoint (°C)"
@@ -122,7 +122,7 @@ const AddSensorButton = () => {
                         type="number"
                         fullWidth
                         margin="dense"
-                        onChange={handleChange}
+                        onChange={captureForms}
                     />
                 </DialogContent>
                 <DialogActions>
@@ -140,4 +140,4 @@ const AddSensorButton = () => {
     );
 };
 
-export default AddSensorButton;
+export default AddSensor;
