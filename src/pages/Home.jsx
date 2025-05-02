@@ -37,6 +37,16 @@ const Home = () => {
         setUpdate(false);
     }, [isUpdate]);
 
+    //Actualizar cada minuto la página
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setUpdate(true);
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
             <Container>

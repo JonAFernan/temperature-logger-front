@@ -25,7 +25,7 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
     // Cargar datos iniciales al abrir el modal
     useEffect(() => {
         setFormData(sensor);
-    }, [sensor]);
+    }, []);
 
     // almacenamos los valores del formulario y converntimos a Number los valores numéricos.
     const captureForms = (event) => {
@@ -42,7 +42,7 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
         });
     };
 
-    const handleSubmit = () => {
+    const sendData = () => {
         const { date, temperature, ...response } = formData;
         fetch(`${API_URLS.UPDATE_SENSOR}${response.sensor_id}`, {
             method: 'PUT',
@@ -122,11 +122,7 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancelar</Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                >
+                <Button variant="contained" color="primary" onClick={sendData}>
                     Actualizar
                 </Button>
             </DialogActions>
