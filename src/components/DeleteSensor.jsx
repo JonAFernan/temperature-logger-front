@@ -21,13 +21,12 @@ const DeleteSensor = ({ open, sensor, onClose }) => {
             .then((response) => response.json())
             .then((data) => {
                 if (!data.errors) {
-                    console.log('Sensor eliminado:', data);
                     onClose();
                     navigate('/');
                 }
             })
             .catch((error) =>
-                console.error('Error al eliminar sensor:', error),
+                console.error('Error when deleting the sensor:', error),
             );
     };
 

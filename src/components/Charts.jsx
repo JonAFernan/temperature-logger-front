@@ -9,24 +9,23 @@ const Charts = ({ sensor_id }) => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const dateTo = formatDate(new Date().toISOString());
     const dateFrom = formatDate(
-        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Últimas 24 horas
+        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
     );
 
-    //función para llamara a la BD
+    //fecth data from BD
     const loadData = async () => {
         await fetchRecords(sensor_id, dateFrom, dateTo);
         setDataLoaded(true);
     };
 
-    // Llamar a fetchRecords
     useEffect(() => {
         loadData();
     }, []);
 
-    // Genera un array para mostrar las filas de valores fijos
+    // Generates an array to display the rows of fixed values
     const singleValueArray = (value, length) => Array(length).fill(value);
 
-    // Formatear datos para el gráfico
+    // Format data for the chart
     const formattedData = records.map((record) => ({
         time: new Date(record.date).toLocaleTimeString([], {
             hour: '2-digit',

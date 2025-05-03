@@ -17,12 +17,12 @@ const useFetchRecords = () => {
 
             const data = await response.json();
             if (data.records) {
-                setRecords(data.records); //El cambio de estado lo usamos en la generación de los gráficos.
+                setRecords(data.records); //State change is used in the generation of the graphs.
                 setSensorInfo(data.sensor);
-                return data; // El return lo usamos en la generación del CSV.
+                return data; // The return is used in the CSV generation.
             }
         } catch (error) {
-            console.error('Error al obtener registros:', error);
+            console.error('Error getting the records:', error);
         } finally {
             setLoading(false);
         }

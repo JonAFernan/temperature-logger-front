@@ -22,12 +22,12 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
 
     const [backendErrors, setBackendErrors] = useState([]);
 
-    // Cargar datos iniciales al abrir el modal
+    // Load data when we open the modal
     useEffect(() => {
         setFormData(sensor);
     }, []);
 
-    // almacenamos los valores del formulario y converntimos a Number los valores numéricos.
+    // we store the form values and convert the numeric values to Number.
     const captureForms = (event) => {
         const { name, value } = event.target;
         const numericFields = [
@@ -54,14 +54,13 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
                 if (data.errors) {
                     setBackendErrors(data.errors);
                 } else {
-                    console.log('Sensor actualizado:', data);
                     setUpdate(true);
                     onClose();
                 }
             })
             .catch((error) => {
-                console.error('Error al actualizar sensor:', error);
-                setBackendErrors(['Error de conexión con el servidor']);
+                console.error('Error updating the sensor', error);
+                setBackendErrors(['Error in the server connection']);
             });
     };
 

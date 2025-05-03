@@ -12,11 +12,7 @@ import ExportCSV from './ExportCSV';
 const SensorCardDetailed = ({ sensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
-    const data = [
-        { field1: 'row1-col1', field2: 'row1-col2', field3: 'row1-col3' },
-        { field1: 'row2-col1', field2: 'row2-col2', field3: 'row2-col3' },
-        // Include additional data as needed
-    ];
+
     return (
         <>
             <Card
@@ -62,7 +58,7 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                     </Box>
                 </CardContent>
             </Card>
-            <ExportCSV data={data} sensor={sensor} />
+            <ExportCSV sensor={sensor} />
             <Charts sensor_id={sensor.sensor_id} />
             <DeleteSensor
                 open={isDeleting}

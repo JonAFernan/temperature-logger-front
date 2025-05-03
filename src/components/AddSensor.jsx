@@ -19,7 +19,7 @@ const AddSensor = ({ setUpdate }) => {
         alarm_range_max: '',
         setpoint: '',
     });
-    const [errors, setErrors] = useState([]); // Estado para almacenar errores del backend
+    const [errors, setErrors] = useState([]); // store the errors send from the backend
 
     const openModal = () => setOpen(true);
     const closeModal = () => {
@@ -29,15 +29,15 @@ const AddSensor = ({ setUpdate }) => {
             alarm_range_min: '',
             alarm_range_max: '',
             setpoint: '',
-        }); //limpiar valores al vaciar el modal
-        setErrors([]); // Limpiar errores al cerrar el modal
+        }); //Clean de values when we close the modal
+        setErrors([]); // clean errors array
         setOpen(false);
     };
 
+    // This function captures form input events and updates the sensor data state.
     const captureForms = (event) => {
         const { name, value } = event.target;
 
-        // Si el campo es numérico, convertimos a Number
         const numericFields = [
             'alarm_range_min',
             'alarm_range_max',
@@ -45,7 +45,7 @@ const AddSensor = ({ setUpdate }) => {
         ];
         setSensorData({
             ...sensorData,
-            [name]: numericFields.includes(name) ? Number(value) : value, // Convierte a número si es necesario
+            [name]: numericFields.includes(name) ? Number(value) : value, // it converts the value to a number before updating the state.
         });
     };
 
@@ -58,15 +58,17 @@ const AddSensor = ({ setUpdate }) => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.errors) {
-                    setErrors(data.errors); // Guardamos los errores enviados por el backend
+                    setErrors(data.errors);
                 } else {
                     setUpdate(true);
                     closeModal();
                 }
             })
             .catch((err) => {
-                console.error('Error en la petición:', err); // Muestra el error en la consola
-                setErrors([err.message || 'Error de conexión con el servidor']); // Usa el mensaje del error
+                console.error('Error in the request', err);
+                setErrors([
+                    err.message || 'Error in the connection to the server',
+                ]);
             });
     };
 

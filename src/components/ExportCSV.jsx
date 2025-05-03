@@ -12,7 +12,7 @@ const ExportCSV = ({ sensor }) => {
 
     const dateTo = formatDate(new Date().toISOString());
     const dateFrom = formatDate(
-        new Date(Date.now() - 360 * 24 * 60 * 60 * 1000).toISOString(), //un año
+        new Date(Date.now() - 360 * 24 * 60 * 60 * 1000).toISOString(), //get data from last year
     );
 
     const generateCSV = (records, sensor) => {
