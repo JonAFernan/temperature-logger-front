@@ -5,6 +5,7 @@ export const isSensorInAlarm = (sensor) => {
     );
 };
 
+//Modifica el color de las tarjeta para que visualmente sea más sencillo saber si un equipo funciona correctamente
 export const color = (sensor) => {
     const nullTemperature = '#d3d3d3';
     const temperatureCorrect = '#ccffcc';
@@ -12,4 +13,9 @@ export const color = (sensor) => {
 
     if (sensor.temperature === null) return nullTemperature;
     return isSensorInAlarm(sensor) ? alarm : temperatureCorrect;
+};
+
+//formatea las fechas para que pasen la validación de la API
+export const formatDate = (date) => {
+    return date.split('.')[0] + '+00:00';
 };

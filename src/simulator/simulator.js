@@ -1,8 +1,5 @@
 import API_URLS from '../lib/apiUrls.js';
-//Formato compatible con la base de datos
-const formatDate = (date) => {
-    return date.split('.')[0] + '+00:00';
-};
+import { formatDate } from '../lib/aux-functions.js';
 
 //Función para generar temperaturas aleatorias basadas en el setpoint
 function getRandomTemperature(max, temperature) {

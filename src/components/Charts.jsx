@@ -1,56 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { CircularProgress, Box, Typography } from '@mui/material';
-import API_URLS from '../lib/apiUrls.js';
-
-const formatDate = (date) => {
-    return date.split('.')[0] + '+00:00';
-};
-
-//genera un arry con 60 valores para mostrar las filas de los valores fijos.
-const createFixedArray = (value, length) => {
-    return Array(length).fill(value);
-};
+import useFetchRecords from '../lib/useFetchRecords';
+import { formatDate } from '../lib/aux-functions.js';
 
 const Charts = ({ sensor_id }) => {
-    const [records, setRecords] = useState([]);
-    const [sensorInfo, setSensorInfo] = useState({});
-    const [loading, setLoading] = useState(true); // ✅ Spinner de carga
+    const dateTo = formatDate(new Date().toISOString());
+    const dateFrom = formatDate(
+        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+    );
 
-    const fetchRecords = async () => {
-        setLoading(true); // ✅ Activar loading antes de hacer la solicitud
+    // Uso del custom hook en el componente
+    const { records, sensorInfo, loading } = useFetchRecords(
+        sensor_id,
+        dateFrom,
+        dateTo,
+    );
 
-        const dateTo = formatDate(new Date().toISOString());
-        const dateFrom = formatDate(
-            new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-        );
-
-        try {
-            const response = await fetch(API_URLS.GET_RECORDS, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    sensor_id,
-                    date_from: dateFrom,
-                    date_to: dateTo,
-                }),
-            });
-
-            const data = await response.json();
-            if (data.records) {
-                setRecords(data.records);
-                setSensorInfo(data.sensor);
-            }
-        } catch (error) {
-            console.error('Error al obtener registros:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchRecords();
-    }, []);
+    // Genera un array para mostrar las filas de valores fijos
+    const singleValueArray = (value, length) => Array(length).fill(value);
 
     // Formatear datos para el gráfico
     const formattedData = records.map((record) => ({
@@ -93,7 +61,7 @@ const Charts = ({ sensor_id }) => {
                             color: 'black',
                         },
                         {
-                            data: createFixedArray(
+                            data: singleValueArray(
                                 sensorInfo.setpoint,
                                 formattedData.length,
                             ),
@@ -102,7 +70,7 @@ const Charts = ({ sensor_id }) => {
                             color: 'green',
                         },
                         {
-                            data: createFixedArray(
+                            data: singleValueArray(
                                 sensorInfo.alarm_range_min,
                                 formattedData.length,
                             ),
@@ -111,7 +79,7 @@ const Charts = ({ sensor_id }) => {
                             color: 'red',
                         },
                         {
-                            data: createFixedArray(
+                            data: singleValueArray(
                                 sensorInfo.alarm_range_max,
                                 formattedData.length,
                             ),

@@ -7,10 +7,16 @@ import { useState } from 'react';
 import UpdateSensor from './UpdateSensor.jsx';
 import DeleteSensor from './DeleteSensor.jsx';
 import Charts from './Charts.jsx';
+import ExportCSV from './ExportCSV';
 
 const SensorCardDetailed = ({ sensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const data = [
+        { field1: 'row1-col1', field2: 'row1-col2', field3: 'row1-col3' },
+        { field1: 'row2-col1', field2: 'row2-col2', field3: 'row2-col3' },
+        // Include additional data as needed
+    ];
     return (
         <>
             <Card
@@ -38,6 +44,7 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                     <Typography variant="body2">
                         Alarma alta temperatura: {sensor.alarm_range_max}°C
                     </Typography>
+
                     <Box sx={{ display: 'flex', gap: 2, marginTop: 2 }}>
                         <IconButton
                             color="primary"
@@ -55,6 +62,7 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                     </Box>
                 </CardContent>
             </Card>
+            <ExportCSV data={data} sensor={sensor} />
             <Charts sensor_id={sensor.sensor_id} />
             <DeleteSensor
                 open={isDeleting}
