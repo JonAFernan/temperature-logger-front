@@ -12,12 +12,14 @@ const Charts = ({ sensor_id }) => {
         new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Últimas 24 horas
     );
 
+    //función para llamara a la BD
+    const loadData = async () => {
+        await fetchRecords(sensor_id, dateFrom, dateTo);
+        setDataLoaded(true);
+    };
+
     // Llamar a fetchRecords
     useEffect(() => {
-        const loadData = async () => {
-            await fetchRecords(sensor_id, dateFrom, dateTo);
-            setDataLoaded(true);
-        };
         loadData();
     }, []);
 

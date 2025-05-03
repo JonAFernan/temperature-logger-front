@@ -19,6 +19,7 @@ const useFetchRecords = () => {
             if (data.records) {
                 setRecords(data.records);
                 setSensorInfo(data.sensor);
+                return data;
             }
         } catch (error) {
             console.error('Error al obtener registros:', error);
