@@ -1,46 +1,51 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import useFetchRecords from '../lib/useFetchRecords';
+import { formatDate } from '../lib/aux-functions';
 
-const ExportCSV = ({ data, sensor }) => {
+const ExportCSV = ({ sensor }) => {
+    const dateTo = formatDate(new Date().toISOString());
+    const dateFrom = formatDate(
+        new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    );
+
+    const { sensorInfo, records, loading } = useFetchRecords(
+        sensor.sensor_id,
+        dateFrom,
+        dateTo,
+    );
+
     const downloadCSV = () => {
-        // Convert the data array into a CSV string
+        if (!records.length) {
+            console.log(records.length);
+            return;
+        }
 
-        console.log(Date.now().toString());
-
-        const example = {
-            sensor: {
-                setpoint: 4,
-                alarm_range_min: 1,
-                alarm_range_max: 7,
-            },
-            records: [],
-        };
-
-        const rows = example.records.map((record) => [
-            sensor.sensor_id,
-            sensor.address,
-            sensor.name,
-            sensor.alarm_range_min,
-            sensor.alarm_range_max,
-            sensor.setpoint,
+        const rows = records.map((record) => [
+            sensorInfo.sensor_id,
+            sensorInfo.address,
+            sensorInfo.name,
+            sensorInfo.alarm_range_min,
+            sensorInfo.alarm_range_max,
+            sensorInfo.setpoint,
             record.temperature,
             record.date,
         ]);
+
+        // Construcción del CSV
         const csvString = [
-            Object.keys(sensor), //encabezados
+            Object.keys(sensorInfo), // Encabezados
             ...rows, // Filas
         ]
             .map((row) => row.join(','))
             .join('\n');
 
-        // Create a Blob from the CSV string
+        // Creación del Blob y descarga
         const blob = new Blob([csvString], { type: 'text/csv' });
-
-        // Generate a download link and initiate the download
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'temp_logger_download.csv';
+        link.download = `sensor_${sensor_id}_records.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -48,8 +53,13 @@ const ExportCSV = ({ data, sensor }) => {
     };
 
     return (
-        <Button variant="contained" color="primary" onClick={downloadCSV}>
-            Export CSV
+        <Button
+            variant="contained"
+            color="primary"
+            onClick={downloadCSV}
+            disabled={loading}
+        >
+            {loading ? 'Cargando...' : 'Exportar CSV'}
         </Button>
     );
 };

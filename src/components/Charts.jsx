@@ -5,17 +5,21 @@ import useFetchRecords from '../lib/useFetchRecords';
 import { formatDate } from '../lib/aux-functions.js';
 
 const Charts = ({ sensor_id }) => {
+    const { records, sensorInfo, loading, fetchRecords } = useFetchRecords();
+    const [dataLoaded, setDataLoaded] = useState(false);
     const dateTo = formatDate(new Date().toISOString());
     const dateFrom = formatDate(
-        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Últimas 24 horas
     );
 
-    // Uso del custom hook en el componente
-    const { records, sensorInfo, loading } = useFetchRecords(
-        sensor_id,
-        dateFrom,
-        dateTo,
-    );
+    // Llamar a fetchRecords
+    useEffect(() => {
+        const loadData = async () => {
+            await fetchRecords(sensor_id, dateFrom, dateTo);
+            setDataLoaded(true);
+        };
+        loadData();
+    }, []);
 
     // Genera un array para mostrar las filas de valores fijos
     const singleValueArray = (value, length) => Array(length).fill(value);
@@ -41,7 +45,7 @@ const Charts = ({ sensor_id }) => {
             <Typography color="Black" variant="h4" gutterBottom>
                 24h
             </Typography>
-            {loading ? (
+            {loading || !dataLoaded ? (
                 <CircularProgress />
             ) : (
                 <LineChart
