@@ -3,6 +3,7 @@ import SensorCard from '../components/SensorCard';
 import LogoutButton from '../components/LogoutButton.jsx';
 import AddSensor from '../components/AddSensor';
 import API_URLS from '../lib/apiUrls.js';
+import { getUserRole } from '../lib/aux-functions.js';
 import {
     Container,
     Grid,
@@ -15,8 +16,11 @@ const Home = () => {
     const [sensors, setSensors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    //Este estado hace que se actualice la lista de sensores cuando añadimos uno
+
+    //refresh the page whe we add a new sensor
     const [isUpdate, setUpdate] = useState(true);
+    const role = getUserRole();
+
     useEffect(() => {
         if (isUpdate) {
             fetch(API_URLS.GET_ALL_SENSORS)
@@ -79,7 +83,7 @@ const Home = () => {
                     </Grid>
                 )}
             </Container>
-            <AddSensor setUpdate={setUpdate} />
+            {role === 'admin' && <AddSensor setUpdate={setUpdate} />}
         </>
     );
 };

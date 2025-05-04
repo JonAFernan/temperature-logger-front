@@ -19,3 +19,15 @@ export const color = (sensor) => {
 export const formatDate = (date) => {
     return date.split('.')[0] + '+00:00';
 };
+
+export const getUserRole = () => {
+    const token = localStorage.getItem('jwt');
+
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.role;
+    } catch (error) {
+        console.error('Error al obtener el rol:', error);
+        return null;
+    }
+};
