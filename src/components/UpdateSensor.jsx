@@ -43,10 +43,14 @@ const UpdateSensor = ({ open, sensor, onClose, setUpdate }) => {
     };
 
     const sendData = () => {
+        const token = localStorage.getItem('jwt');
         const { date, temperature, ...response } = formData;
         fetch(`${API_URLS.UPDATE_SENSOR}${response.sensor_id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(response),
         })
             .then((response) => response.json())

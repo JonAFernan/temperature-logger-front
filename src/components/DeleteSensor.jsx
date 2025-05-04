@@ -13,9 +13,13 @@ import API_URLS from '../lib/apiUrls.js';
 const DeleteSensor = ({ open, sensor, onClose }) => {
     const navigate = useNavigate();
     const handleDelete = () => {
+        const token = localStorage.getItem('jwt');
         fetch(`${API_URLS.DELETE_SENSOR}${sensor.sensor_id}`, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify({ sensor_id: sensor.sensor_id }),
         })
             .then((response) => response.json())
