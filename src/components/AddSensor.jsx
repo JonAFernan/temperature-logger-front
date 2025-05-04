@@ -50,9 +50,13 @@ const AddSensor = ({ setUpdate }) => {
     };
 
     const sendData = () => {
+        const token = localStorage.getItem('jwt');
         fetch(API_URLS.ADD_SENSOR, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(sensorData),
         })
             .then((response) => response.json())

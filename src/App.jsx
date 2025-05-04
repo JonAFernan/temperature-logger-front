@@ -5,15 +5,18 @@ import SensorDetail from './pages/SensorDetail';
 import NotFoundPage_404 from './pages/Error404';
 import NotFoundPage_500 from './pages/Error500';
 import Login from './pages/Login';
+import ProtectedRoute from './routes/ProtectedRoute';
 const App = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/sensor/:id" element={<SensorDetail />} />
+                <Route path="/user/login" element={<Login />} />
                 <Route path="*" element={<NotFoundPage_404 />} />
                 <Route path="/500" element={<NotFoundPage_500 />} />
-                <Route path="/user/login" element={<Login />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/sensor/:id" element={<SensorDetail />} />
+                </Route>
             </Routes>
         </Router>
     );

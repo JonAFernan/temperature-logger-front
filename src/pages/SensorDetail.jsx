@@ -5,6 +5,7 @@ import SensorCardDetailed from '../components/SensorCardDetailed';
 import API_URLS from '../lib/apiUrls.js';
 import { useNavigate } from 'react-router-dom';
 import { HomeButton } from '../components/HomeButton';
+import LogoutButton from '../components/LogoutButton.jsx';
 
 const SensorDetail = () => {
     const { id } = useParams();
@@ -39,6 +40,7 @@ const SensorDetail = () => {
 
     return (
         <>
+            <LogoutButton />
             <HomeButton></HomeButton>
             <Container>
                 <SensorCardDetailed sensor={sensor} setUpdate={setUpdate} />

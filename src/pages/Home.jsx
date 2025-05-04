@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SensorCard from '../components/SensorCard';
+import LogoutButton from '../components/LogoutButton.jsx';
 import AddSensor from '../components/AddSensor';
 import API_URLS from '../lib/apiUrls.js';
 import {
@@ -49,6 +50,7 @@ const Home = () => {
 
     return (
         <>
+            <LogoutButton />
             <Container>
                 <Typography variant="h1" gutterBottom>
                     Sensores de Temperatura

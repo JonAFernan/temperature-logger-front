@@ -9,6 +9,7 @@ export const API_URLS = {
     DELETE_SENSOR: `${API_BASE_URL}/sensors/`,
     ADD_RECORDS: `${API_BASE_URL}/records/add`,
     GET_RECORDS: `${API_BASE_URL}/records/find`,
+    GET_JWT: `${API_BASE_URL}/user/login`,
 };
 
 export default API_URLS;
