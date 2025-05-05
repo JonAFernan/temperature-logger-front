@@ -6,6 +6,9 @@ import NotFoundPage_404 from './pages/Error404';
 import NotFoundPage_500 from './pages/Error500';
 import Login from './pages/Login';
 import ProtectedRoute from './routes/ProtectedRoute';
+import Layout from './components/Layout'; // Importamos el Layout
+import './App.css';
+
 const App = () => {
     return (
         <Router>
@@ -14,8 +17,22 @@ const App = () => {
                 <Route path="*" element={<NotFoundPage_404 />} />
                 <Route path="/500" element={<NotFoundPage_500 />} />
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/sensor/:id" element={<SensorDetail />} />
+                    <Route
+                        path="/"
+                        element={
+                            <Layout>
+                                <Home />
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path="/sensor/:id"
+                        element={
+                            <Layout>
+                                <SensorDetail />
+                            </Layout>
+                        }
+                    />
                 </Route>
             </Routes>
         </Router>

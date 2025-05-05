@@ -15,11 +15,11 @@ const SensorCard = ({ sensor }) => {
                 }}
             >
                 <CardContent>
-                    <Typography variant="h4">{sensor.name}</Typography>
-                    <Typography variant="body2">
+                    <Typography variant="h5">{sensor.name}</Typography>
+                    <Typography variant="body1">
                         Temperatura: {sensor.temperature ?? 'N/A'}°C
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         Setpoint: {sensor.setpoint}°C
                     </Typography>
                 </CardContent>

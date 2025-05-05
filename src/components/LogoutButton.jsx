@@ -11,10 +11,13 @@ const LogoutButton = () => {
 
     return (
         <Button
-            variant="contained"
-            color="primary"
+            variant="text"
+            color="white"
             onClick={logout}
-            sx={{ marginTop: 2 }}
+            sx={{
+                mb: 1,
+                fontSize: { xs: '0.75rem', sm: '1rem' },
+            }}
         >
             Cerrar sesión
         </Button>

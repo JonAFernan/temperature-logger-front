@@ -25,20 +25,20 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
                 }}
             >
                 <CardContent>
-                    <Typography variant="h4">{sensor.name}</Typography>
-                    <Typography variant="body2">
+                    <Typography variant="h3">{sensor.name}</Typography>
+                    <Typography variant="body1">
                         Dirección: {sensor.address}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         Temperatura: {sensor.temperature ?? 'N/A'}°C
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         Setpoint: {sensor.setpoint}°C
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         Alarma baja temperatura: {sensor.alarm_range_min}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         Alarma alta temperatura: {sensor.alarm_range_max}°C
                     </Typography>
 

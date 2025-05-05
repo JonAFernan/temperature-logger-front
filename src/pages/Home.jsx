@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import SensorCard from '../components/SensorCard';
-import LogoutButton from '../components/LogoutButton.jsx';
 import AddSensor from '../components/AddSensor';
 import API_URLS from '../lib/apiUrls.js';
 import { getUserRole } from '../lib/aux-functions.js';
@@ -10,6 +9,7 @@ import {
     Typography,
     Alert,
     CircularProgress,
+    Box,
 } from '@mui/material';
 
 const Home = () => {
@@ -54,36 +54,55 @@ const Home = () => {
 
     return (
         <>
-            <LogoutButton />
             <Container>
-                <Typography variant="h1" gutterBottom>
-                    Sensores de Temperatura
-                </Typography>
-                {loading && <CircularProgress />}
-                {error && <Alert severity="error">{error}</Alert>}
-                {!loading && !error && (
-                    <Grid container spacing={2}>
-                        {sensors.length > 0 ? (
-                            sensors.map((sensor) => (
-                                <Grid
-                                    item
-                                    key={sensor.sensor_id}
-                                    xs={12}
-                                    sm={6}
-                                    md={4}
-                                >
-                                    <SensorCard sensor={sensor} />
-                                </Grid>
-                            ))
-                        ) : (
-                            <Typography variant="body1">
-                                No hay sensores disponibles.
-                            </Typography>
-                        )}
-                    </Grid>
-                )}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        my: 3,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            textAlign: 'center',
+                            width: '100%',
+                            paddingBottom: { xs: 1, sm: 4 },
+                        }}
+                    >
+                        <Typography variant="h2" gutterBottom>
+                            Equipos Refrigerados
+                        </Typography>
+                    </Box>
+                    {loading && <CircularProgress />}
+                    {error && <Alert severity="error">{error}</Alert>}
+                    {!loading && !error && (
+                        <Grid
+                            container
+                            spacing={2}
+                            mb={2}
+                            justifyContent="center"
+                            sx={{
+                                paddingBottom: { xs: 1, sm: 4 },
+                            }}
+                        >
+                            {sensors.length > 0 ? (
+                                sensors.map((sensor) => (
+                                    <Grid item key={sensor.sensor_id}>
+                                        <SensorCard sensor={sensor} />
+                                    </Grid>
+                                ))
+                            ) : (
+                                <Typography variant="body1">
+                                    No hay sensores disponibles.
+                                </Typography>
+                            )}
+                        </Grid>
+                    )}
+
+                    {role === 'admin' && <AddSensor setUpdate={setUpdate} />}
+                </Box>
             </Container>
-            {role === 'admin' && <AddSensor setUpdate={setUpdate} />}
         </>
     );
 };

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, CircularProgress } from '@mui/material';
+import { Container, CircularProgress, Box } from '@mui/material';
 import SensorCardDetailed from '../components/SensorCardDetailed';
 import API_URLS from '../lib/apiUrls.js';
 import { useNavigate } from 'react-router-dom';
-import { HomeButton } from '../components/HomeButton';
-import LogoutButton from '../components/LogoutButton.jsx';
 
 const SensorDetail = () => {
     const { id } = useParams();
@@ -40,10 +38,25 @@ const SensorDetail = () => {
 
     return (
         <>
-            <LogoutButton />
-            <HomeButton></HomeButton>
             <Container>
-                <SensorCardDetailed sensor={sensor} setUpdate={setUpdate} />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        my: 3,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <SensorCardDetailed
+                        sensor={sensor}
+                        setUpdate={setUpdate}
+                        sx={{
+                            mt: 5,
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                    />
+                </Box>
             </Container>
         </>
     );
