@@ -9,7 +9,7 @@ const Charts = ({ sensor_id }) => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const dateTo = formatDate(new Date().toISOString());
     const dateFrom = formatDate(
-        new Date(Date.now() - 90 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
+        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
     );
 
     //fecth data from BD
