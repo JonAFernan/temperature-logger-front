@@ -9,7 +9,7 @@ const Charts = ({ sensor_id }) => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const dateTo = formatDate(new Date().toISOString());
     const dateFrom = formatDate(
-        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
+        new Date(Date.now() - 90 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
     );
 
     //fecth data from BD
@@ -40,6 +40,7 @@ const Charts = ({ sensor_id }) => {
                 textAlign: 'center',
                 marginTop: 2,
                 width: '100%',
+                height: 500,
                 bgcolor: 'white',
             }}
         >
@@ -93,10 +94,9 @@ const Charts = ({ sensor_id }) => {
                             color: 'orange',
                         },
                     ]}
-                    height={500}
-                    width={1000}
                     grid={{ vertical: true, horizontal: true }}
                     margin={{ bottom: 10 }}
+                    height={400}
                 />
             )}
         </Box>
