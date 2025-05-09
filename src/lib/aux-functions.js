@@ -27,7 +27,12 @@ export const getUserRole = () => {
         const payload = JSON.parse(atob(token.split('.')[1]));
         return payload.role;
     } catch (error) {
-        console.error('Error al obtener el rol:', error);
+        console.error('Error getting the role', error);
         return null;
     }
+};
+
+export const logout = (nav) => {
+    localStorage.removeItem('jwt');
+    nav('/user/login');
 };

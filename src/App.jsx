@@ -6,7 +6,7 @@ import NotFoundPage_404 from './pages/Error404';
 import NotFoundPage_500 from './pages/Error500';
 import Login from './pages/Login';
 import ProtectedRoute from './routes/ProtectedRoute';
-import Layout from './components/Layout'; // Importamos el Layout
+import Layout from './components/Layout';
 import './App.css';
 
 const App = () => {
