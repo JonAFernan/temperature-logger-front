@@ -1,5 +1,6 @@
-const PORT = '3000';
-const API_BASE_URL = `http://localhost:${PORT}`;
+//const PORT = '3000';
+//const API_BASE_URL = `http://localhost:${PORT}`;
+const API_BASE_URL = 'http://api.proyectojonafernandez.com.es';
 
 export const API_URLS = {
     GET_ALL_SENSORS: `${API_BASE_URL}/sensors/all`,
