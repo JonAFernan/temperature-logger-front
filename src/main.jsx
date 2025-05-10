@@ -2,9 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
-import { startSimulator } from './simulator/simulator.js';
+//import { startSimulator } from './simulator/simulator.js';
 
-startSimulator();
+//startSimulator();
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
