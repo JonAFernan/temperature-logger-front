@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SensorDetail from './pages/SensorDetail';
@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import './App.css';
 
 const App = () => {
+    window.addEventListener('beforeunload', () => localStorage.clear()); //clear localStorage when we close the application windows
     return (
         <Router>
             <Routes>
