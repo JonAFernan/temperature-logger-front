@@ -72,7 +72,7 @@ const Login = () => {
                     )}
                     <TextField
                         name="username"
-                        placeholder="Username"
+                        placeholder="username"
                         fullWidth
                         required
                         autoFocus
@@ -80,7 +80,7 @@ const Login = () => {
                     />
                     <TextField
                         name="password"
-                        placeholder="Password"
+                        placeholder="password"
                         fullWidth
                         required
                         type="password"
