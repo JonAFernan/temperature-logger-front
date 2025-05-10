@@ -7,7 +7,9 @@ import { formatDate } from '../lib/aux-functions.js';
 const Charts = ({ sensor_id }) => {
     const { records, sensorInfo, loading, fetchRecords } = useFetchRecords();
     const [dataLoaded, setDataLoaded] = useState(false);
-    const dateTo = formatDate(new Date().toISOString());
+    const dateTo = formatDate(
+        new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+    );
     const dateFrom = formatDate(
         new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
     );

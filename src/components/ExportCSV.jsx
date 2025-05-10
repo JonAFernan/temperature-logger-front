@@ -10,7 +10,9 @@ const ExportCSV = ({ sensor }) => {
     const { loading, fetchRecords } = useFetchRecords();
     const [open, setOpen] = useState(false);
 
-    const dateTo = formatDate(new Date().toISOString());
+    const dateTo = formatDate(
+        new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+    );
     const dateFrom = formatDate(
         new Date(Date.now() - 360 * 24 * 60 * 60 * 1000).toISOString(), //get data from last year
     );
