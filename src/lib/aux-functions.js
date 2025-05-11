@@ -5,6 +5,15 @@ export const isSensorInAlarm = (sensor) => {
     );
 };
 
+//Cheks if the sensors data is updated to current time. If not means that we are not getting data from sensors
+export const isNotConnected = (sensor) => {
+    const securityMargin = 15 * 60 * 1000; //15 minutes
+    const currentDate = Date.now();
+    const sensorDate = new Date(sensor.date).getTime();
+
+    return sensorDate < currentDate - securityMargin;
+};
+
 //Modifies the colour of the cards to make it visually easier to tell if a device is working properly.
 export const color = (sensor) => {
     const nullTemperature = '#d3d3d3';

@@ -1,9 +1,9 @@
-import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { color } from '../lib/aux-functions.js';
+import { color, isNotConnected } from '../lib/aux-functions.js';
 
 const SensorCard = ({ sensor }) => {
+    if (isNotConnected(sensor)) sensor.temperature = null;
     return (
         <Link to={`/sensor/${sensor.sensor_id}`}>
             <Card

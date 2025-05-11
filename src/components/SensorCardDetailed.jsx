@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, IconButton, Box } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { color, getUserRole } from '../lib/aux-functions.js';
+import { color, getUserRole, isNotConnected } from '../lib/aux-functions.js';
 import { useState } from 'react';
 import UpdateSensor from './UpdateSensor.jsx';
 import DeleteSensor from './DeleteSensor.jsx';
@@ -13,6 +13,8 @@ const SensorCardDetailed = ({ sensor, setUpdate }) => {
     const [isUpdating, setIsUpdating] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const role = getUserRole();
+
+    if (isNotConnected(sensor)) sensor.temperature = null;
 
     return (
         <>
