@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import useFetchRecords from '../lib/useFetchRecords';
-import { formatDate } from '../lib/aux-functions';
+import { formatDate, spainFormat } from '../lib/aux-functions';
 
 const ExportCSV = ({ sensor }) => {
     const { loading, fetchRecords } = useFetchRecords();
@@ -18,8 +18,7 @@ const ExportCSV = ({ sensor }) => {
     );
 
     const generateCSV = (records, sensor) => {
-        const headers = Object.keys(sensor);
-        console.log(headers);
+        const headers = [...Object.keys(sensor), 'time'];
         const rows = records.map((record) => [
             sensor.sensor_id,
             sensor.address,
@@ -28,10 +27,9 @@ const ExportCSV = ({ sensor }) => {
             sensor.alarm_range_max,
             sensor.setpoint,
             record.temperature,
-            record.date,
+            spainFormat(record.date),
         ]);
 
-        console.log(123);
         const csvString = [headers, ...rows]
             .map((row) => row.join(','))
             .join('\n');

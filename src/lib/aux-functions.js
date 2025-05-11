@@ -36,3 +36,16 @@ export const logout = (nav) => {
     localStorage.removeItem('jwt');
     nav('/user/login');
 };
+
+export const spainFormat = (dateString) => {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('es-ES', {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    }).format(date);
+};
