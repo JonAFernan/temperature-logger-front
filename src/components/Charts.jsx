@@ -11,7 +11,7 @@ const Charts = ({ sensor_id }) => {
         new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
     );
     const dateFrom = formatDate(
-        new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
+        new Date(Date.now() - 23 * 60 * 60 * 1000).toISOString(), // Get data from last 24h
     );
 
     //fecth data from BD
