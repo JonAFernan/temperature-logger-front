@@ -50,16 +50,7 @@ const Charts = ({ sensor_id }) => {
                 24h
             </Typography>
             {loading || !dataLoaded ? (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%',
-                    }}
-                >
-                    <CircularProgress />
-                </Box>
+                <CircularProgress />
             ) : (
                 <LineChart
                     xAxis={[

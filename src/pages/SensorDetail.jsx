@@ -31,9 +31,16 @@ const SensorDetail = () => {
 
     if (!sensor)
         return (
-            <Container>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '50vh',
+                }}
+            >
                 <CircularProgress />
-            </Container>
+            </Box>
         );
 
     return (
