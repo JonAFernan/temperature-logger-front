@@ -27,8 +27,8 @@ const Charts = ({ sensor_id }) => {
     // Generates an array to display the rows of fixed values
     const singleValueArray = (value, length) => Array(length).fill(value);
 
-    // Format data for the chart
-    const formattedData = records.map((record) => ({
+    // Format data for the chart. We delete the last value of the array to avoid drawining it.
+    const formattedData = records.slice(0, -1).map((record) => ({
         time: new Date(record.date).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -50,7 +50,16 @@ const Charts = ({ sensor_id }) => {
                 24h
             </Typography>
             {loading || !dataLoaded ? (
-                <CircularProgress />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                    }}
+                >
+                    <CircularProgress />
+                </Box>
             ) : (
                 <LineChart
                     xAxis={[
